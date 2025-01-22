@@ -1,4 +1,3 @@
-/* Genel Stil */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -8,10 +7,9 @@ body {
     align-items: center;
     height: 100vh;
     background-color: #f0f0f0;
-    overflow: hidden; /* Animasyonların taşmasını önler */
+    overflow: hidden; /* Animasyonun taşmasını önlemek için */
 }
 
-/* Konteyner */
 .container {
     text-align: center;
     position: relative; /* Animasyonlu elemanların referansı */
@@ -21,57 +19,33 @@ body {
     margin-top: 20px;
 }
 
-/* Butonlar */
 button {
     padding: 10px 20px;
     font-size: 16px;
     margin: 0 10px;
     cursor: pointer;
     border-radius: 15px;
-    border: none;
-    transition: transform 0.2s ease, background-color 0.3s ease;
 }
 
-button:hover {
-    transform: scale(1.1); /* Buton üzerine gelince büyütme efekti */
-}
-
-#yesButton {
-    background-color: #66bb6a;
-    color: white;
-}
-
-#yesButton:hover {
-    background-color: #43a047;
-}
-
-#noButton {
-    background-color: #ef5350;
-    color: white;
-}
-
-#noButton:hover {
-    background-color: #e53935;
-}
-
-/* Sonuç Görünümü */
 .hidden {
-    display: none; /* Varsayılan olarak gizlenir */
+    display: none;
 }
 
-#result {
-    text-align: center;
-    margin-top: 20px;
+@keyframes heartRain {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100%);
+    }
 }
 
-/* Kalp Animasyonu */
 .heart, .fa-heart {
     position: absolute;
     font-size: 25px;
     color: rgb(255, 166, 178);
     animation: heartMove 5s linear infinite;
     z-index: 0;
-    opacity: 0.8; /* Şeffaflık efekti */
 }
 
 @keyframes heartMove {
@@ -80,34 +54,5 @@ button:hover {
     }
     100% {
         transform: translateY(110vh);
-    }
-}
-
-/* Başlık ve Görsel */
-#title {
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-#image {
-    max-width: 50%;
-    border-radius: 10px;
-}
-
-/* Son Görüntü */
-#newImage {
-    max-width: 60%;
-    margin-top: 20px;
-    border-radius: 10px;
-}
-
-/* Animasyon Taşmalarını Önleme */
-@keyframes heartRain {
-    0% {
-        transform: translateY(-100%);
-    }
-    100% {
-        transform: translateY(100%);
     }
 }
