@@ -1,25 +1,27 @@
 document.getElementById('noButton').addEventListener('mouseover', function () {
-    // Ekran boyutları ve buton boyutlarını al
-    const buttonWidth = this.offsetWidth;
-    const buttonHeight = this.offsetHeight;
-    const windowWidth = window.innerWidth;
-    const windowHeight = window.innerHeight;
+    const OFFSET = 50; // Rastgele konumlandırma mesafesi için bir offset
 
-    // Butonun ekran dışına taşmaması için minimum ve maksimum sınırları hesapla
-    const maxX = windowWidth - buttonWidth;
-    const maxY = windowHeight - buttonHeight;
+    // Mevcut butonun konumu ve boyutları
+    const buttonBox = this.getBoundingClientRect();
 
-    // Rastgele konum hesapla (sınırlar içinde)
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
+    // Ekran boyutlarını al
+    const windowBox = document.body.getBoundingClientRect();
 
-    // Butonu yeni konuma yerleştir
+    // Yeni konumu hesapla
+    let left = Math.random() * (windowBox.width - buttonBox.width - OFFSET);
+    let top = Math.random() * (windowBox.height - buttonBox.height - OFFSET);
+
+    // Butonun sayfa dışına çıkmamasını sağla
+    if (left < 0) left = OFFSET;
+    if (left + buttonBox.width > windowBox.width) left = windowBox.width - buttonBox.width - OFFSET;
+    if (top < 0) top = OFFSET;
+    if (top + buttonBox.height > windowBox.height) top = windowBox.height - buttonBox.height - OFFSET;
+
+    // Butonun pozisyonunu güncelle
     this.style.position = "absolute";
-    this.style.left = `${x}px`;
-    this.style.top = `${y}px`;
-
-    // Görünürlüğünü garanti altına almak için z-index ayarla
-    this.style.zIndex = 1000;
+    this.style.left = `${left}px`;
+    this.style.top = `${top}px`;
+    this.style.zIndex = 1000; // Görünürlüğünü garanti etmek için
 });
 
 document.getElementById('yesButton').addEventListener('click', function () {
