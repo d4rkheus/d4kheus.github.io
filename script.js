@@ -5,14 +5,21 @@ document.getElementById('noButton').addEventListener('mouseover', function () {
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
 
-    // Butonun ekran dışına taşmaması için konum hesapla
-    const x = Math.random() * (windowWidth - buttonWidth);
-    const y = Math.random() * (windowHeight - buttonHeight);
+    // Butonun ekran dışına taşmaması için minimum ve maksimum sınırları hesapla
+    const maxX = windowWidth - buttonWidth;
+    const maxY = windowHeight - buttonHeight;
+
+    // Rastgele konum hesapla (sınırlar içinde)
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
 
     // Butonu yeni konuma yerleştir
     this.style.position = "absolute";
     this.style.left = `${x}px`;
     this.style.top = `${y}px`;
+
+    // Görünürlüğünü garanti altına almak için z-index ayarla
+    this.style.zIndex = 1000;
 });
 
 document.getElementById('yesButton').addEventListener('click', function () {
