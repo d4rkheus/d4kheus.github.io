@@ -1,255 +1,423 @@
-<!doctype html>
+<html lang="en"><script src="chrome-extension://nimlmejbmnecnaghgmbahmbaddhjbecg/content/location/location.js" id="nimlmejbmnecnaghgmbahmbaddhjbecg"></script><script src="chrome-extension://nimlmejbmnecnaghgmbahmbaddhjbecg/libs/extend-native-history-api.js"></script><script src="chrome-extension://nimlmejbmnecnaghgmbahmbaddhjbecg/libs/requests.js"></script><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sleuth Systems - OSINT Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<script src="https://cdn.tailwindcss.com/3.4.16"></script><script bis_use="true" type="text/javascript" charset="utf-8" data-bis-config="[&quot;facebook.com/&quot;,&quot;twitter.com/&quot;,&quot;youtube-nocookie.com/embed/&quot;,&quot;//vk.com/&quot;,&quot;//www.vk.com/&quot;,&quot;linkedin.com/&quot;,&quot;//www.linkedin.com/&quot;,&quot;//instagram.com/&quot;,&quot;//www.instagram.com/&quot;,&quot;//www.google.com/recaptcha/api2/&quot;,&quot;//hangouts.google.com/webchat/&quot;,&quot;//www.google.com/calendar/&quot;,&quot;//www.google.com/maps/embed&quot;,&quot;spotify.com/&quot;,&quot;soundcloud.com/&quot;,&quot;//player.vimeo.com/&quot;,&quot;//disqus.com/&quot;,&quot;//tgwidget.com/&quot;,&quot;//js.driftt.com/&quot;,&quot;friends2follow.com&quot;,&quot;/widget&quot;,&quot;login&quot;,&quot;//video.bigmir.net/&quot;,&quot;blogger.com&quot;,&quot;//smartlock.google.com/&quot;,&quot;//keep.google.com/&quot;,&quot;/web.tolstoycomments.com/&quot;,&quot;moz-extension://&quot;,&quot;chrome-extension://&quot;,&quot;/auth/&quot;,&quot;//analytics.google.com/&quot;,&quot;adclarity.com&quot;,&quot;paddle.com/checkout&quot;,&quot;hcaptcha.com&quot;,&quot;recaptcha.net&quot;,&quot;2captcha.com&quot;,&quot;accounts.google.com&quot;,&quot;www.google.com/shopping/customerreviews&quot;,&quot;buy.tinypass.com&quot;,&quot;gstatic.com&quot;,&quot;secureir.ebaystatic.com&quot;,&quot;docs.google.com&quot;,&quot;contacts.google.com&quot;,&quot;github.com&quot;,&quot;mail.google.com&quot;,&quot;chat.google.com&quot;,&quot;audio.xpleer.com&quot;,&quot;keepa.com&quot;,&quot;static.xx.fbcdn.net&quot;,&quot;sas.selleramp.com&quot;,&quot;1plus1.video&quot;,&quot;console.googletagservices.com&quot;,&quot;//lnkd.demdex.net/&quot;,&quot;//radar.cedexis.com/&quot;,&quot;//li.protechts.net/&quot;,&quot;challenges.cloudflare.com/&quot;,&quot;ogs.google.com&quot;]" src="chrome-extension://nimlmejbmnecnaghgmbahmbaddhjbecg/executors/traffic.js"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#6366f1',secondary:'#a855f7'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="icon" type="image/png" href="https://media.discordapp.net/attachments/1393702929654878241/1409167744154468423/52237dfd12a1d96e72d70420cb85303e-removebg-preview.png?ex=68ac653b&is=68ab13bb&hm=181d60a5809e5c45e5996dc1661dc2b4e12d1b50ea06999b3593720f121513b8&=&format=webp&quality=lossless">
 
-<html lang="tr">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sleuth Systems — OSINT Platform</title>
-  <meta name="description" content="Sleuth Systems — ileri düzey OSINT araçları, hızlı analiz, görselleştirme ve olay takibi." />
-  <meta name="theme-color" content="#050714" />  <!-- Google Fonts -->  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">  <style>
-    :root{
-      --bg:#050714;
-      --glass: rgba(255,255,255,0.04);
-      --accent-a:#00f5ff;
-      --accent-b:#8a2be2;
-      --muted: rgba(255,255,255,0.55);
-      --glass-2: rgba(255,255,255,0.03);
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;background:linear-gradient(180deg,#02020a 0%, #060617 60%);font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;color:white;-webkit-font-smoothing:antialiased}
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+background-color: #0f1117;
+color: #fff;
+}
+.hero-gradient {
+background-color: #0f1117;
+}
+.primary-button {
+background: linear-gradient(90deg, #4f46e5 0%, #7c3aed 100%);
+}
+.secondary-button {
+background: rgba(255, 255, 255, 0.1);
+border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.stat-gradient {
+background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+}
+.nav-container {
+background: rgba(30, 30, 46, 0.8);
+backdrop-filter: blur(10px);
+}
+</style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.16 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.container{width:100%}@media (min-width: 640px){.container{max-width:640px}}@media (min-width: 768px){.container{max-width:768px}}@media (min-width: 1024px){.container{max-width:1024px}}@media (min-width: 1280px){.container{max-width:1280px}}@media (min-width: 1536px){.container{max-width:1536px}}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.-top-4{top:-1rem}.left-0{left:0px}.left-1\/2{left:50%}.top-0{top:0px}.z-50{z-index:50}.mx-auto{margin-left:auto;margin-right:auto}.my-4{margin-top:1rem;margin-bottom:1rem}.mb-12{margin-bottom:3rem}.mb-16{margin-bottom:4rem}.mb-2{margin-bottom:0.5rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.mr-2{margin-right:0.5rem}.mr-4{margin-right:1rem}.mt-1{margin-top:0.25rem}.mt-20{margin-top:5rem}.mt-4{margin-top:1rem}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-10{height:2.5rem}.h-12{height:3rem}.h-16{height:4rem}.h-20{height:5rem}.h-4{height:1rem}.h-8{height:2rem}.min-h-screen{min-height:100vh}.w-10{width:2.5rem}.w-12{width:3rem}.w-16{width:4rem}.w-20{width:5rem}.w-4{width:1rem}.w-8{width:2rem}.w-full{width:100%}.max-w-2xl{max-width:42rem}.max-w-3xl{max-width:48rem}.max-w-4xl{max-width:56rem}.max-w-5xl{max-width:64rem}.max-w-6xl{max-width:72rem}.-translate-x-1\/2{--tw-translate-x:-50%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.transform{transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.flex-col{flex-direction:column}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-16{gap:4rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.space-x-4 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(1rem * var(--tw-space-x-reverse));margin-left:calc(1rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-8 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(2rem * var(--tw-space-x-reverse));margin-left:calc(2rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.whitespace-nowrap{white-space:nowrap}.rounded-button{border-radius:8px}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:16px}.border{border-width:1px}.border-2{border-width:2px}.border-t{border-top-width:1px}.border-gray-700{--tw-border-opacity:1;border-color:rgb(55 65 81 / var(--tw-border-opacity, 1))}.border-gray-800{--tw-border-opacity:1;border-color:rgb(31 41 55 / var(--tw-border-opacity, 1))}.border-primary{--tw-border-opacity:1;border-color:rgb(99 102 241 / var(--tw-border-opacity, 1))}.bg-\[\#0f1117\]{--tw-bg-opacity:1;background-color:rgb(15 17 23 / var(--tw-bg-opacity, 1))}.bg-black{--tw-bg-opacity:1;background-color:rgb(0 0 0 / var(--tw-bg-opacity, 1))}.bg-blue-500{--tw-bg-opacity:1;background-color:rgb(59 130 246 / var(--tw-bg-opacity, 1))}.bg-gray-800{--tw-bg-opacity:1;background-color:rgb(31 41 55 / var(--tw-bg-opacity, 1))}.bg-indigo-500{--tw-bg-opacity:1;background-color:rgb(99 102 241 / var(--tw-bg-opacity, 1))}.bg-primary{--tw-bg-opacity:1;background-color:rgb(99 102 241 / var(--tw-bg-opacity, 1))}.bg-purple-500{--tw-bg-opacity:1;background-color:rgb(168 85 247 / var(--tw-bg-opacity, 1))}.bg-opacity-10{--tw-bg-opacity:0.1}.bg-opacity-20{--tw-bg-opacity:0.2}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.from-blue-500{--tw-gradient-from:#3b82f6 var(--tw-gradient-from-position);--tw-gradient-to:rgb(59 130 246 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-blue-900{--tw-gradient-from:#1e3a8a var(--tw-gradient-from-position);--tw-gradient-to:rgb(30 58 138 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.to-purple-500{--tw-gradient-to:#a855f7 var(--tw-gradient-to-position)}.to-purple-900{--tw-gradient-to:#581c87 var(--tw-gradient-to-position)}.bg-clip-text{-webkit-background-clip:text;background-clip:text}.p-12{padding:3rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.px-8{padding-left:2rem;padding-right:2rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-16{padding-top:4rem;padding-bottom:4rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-24{padding-top:6rem;padding-bottom:6rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.pb-16{padding-bottom:4rem}.pt-24{padding-top:6rem}.pt-8{padding-top:2rem}.text-center{text-align:center}.font-\[\'Pacifico\'\]{font-family:'Pacifico'}.text-2xl{font-size:1.5rem;line-height:2rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-5xl{font-size:3rem;line-height:1}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.font-bold{font-weight:700}.font-normal{font-weight:400}.italic{font-style:italic}.text-blue-400{--tw-text-opacity:1;color:rgb(96 165 250 / var(--tw-text-opacity, 1))}.text-gray-300{--tw-text-opacity:1;color:rgb(209 213 219 / var(--tw-text-opacity, 1))}.text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175 / var(--tw-text-opacity, 1))}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128 / var(--tw-text-opacity, 1))}.text-green-400{--tw-text-opacity:1;color:rgb(74 222 128 / var(--tw-text-opacity, 1))}.text-indigo-400{--tw-text-opacity:1;color:rgb(129 140 248 / var(--tw-text-opacity, 1))}.text-primary{--tw-text-opacity:1;color:rgb(99 102 241 / var(--tw-text-opacity, 1))}.text-purple-400{--tw-text-opacity:1;color:rgb(192 132 252 / var(--tw-text-opacity, 1))}.text-transparent{color:transparent}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.hover\:scale-105:hover{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:transform:hover{transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:text-primary:hover{--tw-text-opacity:1;color:rgb(99 102 241 / var(--tw-text-opacity, 1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}@media (min-width: 640px){.sm\:flex-row{flex-direction:row}}@media (min-width: 768px){.md\:mb-0{margin-bottom:0px}.md\:flex{display:flex}.md\:w-1\/2{width:50%}.md\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:text-7xl{font-size:4.5rem;line-height:1}}</style></head>
+<body __processed_a8c6e8cc-2b32-4c03-ad1f-0b4e517bb981__="true" bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6Im5pbWxtZWpibW5lY25hZ2hnbWJhaG1iYWRkaGpiZWNnIiwiYWRibG9ja2VyU3RhdHVzIjp7IkRJU1BMQVkiOiJkaXNhYmxlZCIsIkZBQ0VCT09LIjoiZGlzYWJsZWQiLCJUV0lUVEVSIjoiZGlzYWJsZWQiLCJSRURESVQiOiJkaXNhYmxlZCIsIlBJTlRFUkVTVCI6ImRpc2FibGVkIiwiSU5TVEFHUkFNIjoiZGlzYWJsZWQiLCJUSUtUT0siOiJkaXNhYmxlZCIsIkxJTktFRElOIjoiZGlzYWJsZWQiLCJDT05GSUciOiJkaXNhYmxlZCJ9LCJ2ZXJzaW9uIjoiMi4wLjI2Iiwic2NvcmUiOjIwMDI2fV0=">
+<header class="fixed top-0 left-0 w-full z-50">
+<div class="nav-container mx-auto rounded-full px-4 py-2 my-4 max-w-6xl" bis_skin_checked="1">
+<nav class="flex items-center justify-between">
+<div class="flex items-center" bis_skin_checked="1">
+<div class="w-10 h-10 flex items-center justify-center text-primary mr-2" bis_skin_checked="1">
+<img src="https://media.discordapp.net/attachments/1393702929654878241/1409167744154468423/52237dfd12a1d96e72d70420cb85303e-removebg-preview.png?ex=68ac653b&is=68ab13bb&hm=181d60a5809e5c45e5996dc1661dc2b4e12d1b50ea06999b3593720f121513b8&=&format=webp&quality=lossless" 
+     alt="Benim Logom" 
+     style="width:32px; height:auto;">
 
-    /* Canvas particle background container */
-    .bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
-
-    .container{position:relative;z-index:5;max-width:1200px;margin:0 auto;padding:48px 28px}
-
-    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
-    .brand{display:flex;gap:14px;align-items:center}
-    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent-a),var(--accent-b));display:grid;place-items:center;box-shadow:0 8px 30px rgba(138,43,226,0.14), inset 0 -6px 20px rgba(0,0,0,0.4)}
-    .logo svg{filter:drop-shadow(0 6px 20px rgba(138,43,226,0.18))}
-    .brand h1{margin:0;font-family:Orbitron, Inter;letter-spacing:0.6px;font-weight:700;font-size:18px}
-    .brand p{margin:0;font-size:12px;color:var(--muted)}
-
-    nav{display:flex;gap:12px;align-items:center}
-    .btn{padding:10px 16px;border-radius:12px;background:transparent;border:1px solid rgba(255,255,255,0.06);backdrop-filter:blur(6px);cursor:pointer;color:var(--muted);font-weight:600}
-    .btn.primary{background:linear-gradient(90deg,var(--accent-a),var(--accent-b));color:#02010a;border:none;box-shadow:0 8px 30px rgba(0,0,0,0.4)}
-
-    /* Hero */
-    .hero{display:grid;grid-template-columns:1fr 460px;gap:36px;align-items:center;margin-top:36px}
-    .hero-left h2{font-size:48px;line-height:1.02;margin:0;font-weight:800;letter-spacing:-1px}
-    .highlight{background:linear-gradient(90deg,var(--accent-a),var(--accent-b));-webkit-background-clip:text;background-clip:text;color:transparent}
-    .hero-left p{color:var(--muted);margin-top:14px;font-size:16px}
-
-    .cta-row{display:flex;gap:12px;margin-top:22px}
-    .ghost{background:transparent;border:1px solid rgba(255,255,255,0.08);padding:10px 14px;border-radius:10px}
-
-    /* Card styles */
-    .card{border-radius:18px;padding:22px;background:linear-gradient(180deg,var(--glass),var(--glass-2));box-shadow:0 10px 40px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
-
-    /* Right panel */
-    .hero-right{position:relative}
-    .panel-visual{height:420px;border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
-    .visual-top{flex:1;padding:18px;display:flex;align-items:center;justify-content:space-between}
-    .fingerprint{width:92px;height:92px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:grid;place-items:center}
-    .stats{display:flex;flex-direction:column;gap:6px}
-    .stats b{font-size:20px}
-    .visual-chart{height:160px;background:linear-gradient(180deg,rgba(0,0,0,0.25),transparent);display:grid;place-items:center}
-
-    /* Features */
-    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
-    .feature{padding:18px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border:1px solid rgba(255,255,255,0.03)}
-    .feature h4{margin:6px 0 0 0}
-    .feature p{color:var(--muted);font-size:13px;margin-top:8px}
-
-    /* Footer */
-    footer{margin-top:42px;padding:22px;border-radius:14px;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));display:flex;justify-content:space-between;align-items:center}
-
-    /* small screens */
-    @media (max-width:980px){
-      .hero{grid-template-columns:1fr;}
-      .hero-right{order:-1;margin-bottom:18px}
-      .features{grid-template-columns:1fr 1fr}
-    }
-    @media (max-width:560px){
-      .features{grid-template-columns:1fr}
-      .hero-left h2{font-size:34px}
-    }
-
-    /* tiny neon accent */
-    .neon{position:relative}
-    .neon:after{content:"";position:absolute;inset:0;border-radius:12px;filter:blur(18px);opacity:0.18;background:linear-gradient(90deg,var(--accent-a),var(--accent-b));z-index:-1}
-
-    /* subtle tilt effect */
-    .tilt{transform-style:preserve-3d;transition:transform 250ms cubic-bezier(.2,.9,.3,1)}
-
-    /* micro animations */
-    .fade-up{opacity:0;transform:translateY(12px);transition:all 600ms cubic-bezier(.2,.9,.3,1)}
-    .reveal{opacity:1;transform:none}
-
-  </style></head>
-<body>
-  <canvas id="bg" class="bg-canvas"></canvas>  <div class="container">
-    <header>
-      <div class="brand">
-        <div class="logo" aria-hidden="true">
-          <!-- simple sleuth icon -->
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M11 2v6" stroke="#fff" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
-            <circle cx="11" cy="12" r="7" stroke="#fff" stroke-width="1.25" opacity="0.95"/>
-            <path d="M20 20l-3-3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
-          </svg>
-        </div>
-        <div>
-          <h1>Sleuth Systems</h1>
-          <p>OSINT · Analiz · Görselleştirme</p>
-        </div>
-      </div><nav>
-    <button class="btn">Features</button>
-    <button class="btn">Docs</button>
-    <button class="btn">Pricing</button>
-    <button class="btn primary" id="visit">htrps://sleuth.site</button>
-  </nav>
+</div>
+<span class="font-['Pacifico'] text-xl text-white">Sleuth Systems</span>
+</div>
+<div class="hidden md:flex items-center space-x-8" bis_skin_checked="1">
+<a href="#" class="text-white hover:text-primary transition-colors whitespace-nowrap">Home</a>
+<a href="#" class="text-gray-300 hover:text-primary transition-colors whitespace-nowrap">Features</a>
+<a href="#" class="text-gray-300 hover:text-primary transition-colors whitespace-nowrap">Process</a>
+<a href="#" class="text-gray-300 hover:text-primary transition-colors whitespace-nowrap">Pricing</a>
+<a href="#" class="text-gray-300 hover:text-primary transition-colors whitespace-nowrap">FAQ</a>
+</div>
+<a href="https://discord.gg/7Q7XffH2YF" class="primary-button text-white px-6 py-2 rounded-button flex items-center whitespace-nowrap">
+<i class="ri-discord-fill ri-lg mr-2"></i>
+Join Discord
+</a>
+</nav>
+</div>
 </header>
-
-<main class="hero">
-  <section class="hero-left">
-    <h2 class="fade-up reveal">Sleuth Systems — <span class="highlight">OSINT</span> için yeniden tanımlandı</h2>
-    <p class="fade-up reveal" style="transition-delay:80ms">Derin web taraması, görsel analiz, bağlantı haritalama ve gerçek zamanlı uyarılar. Teknoloji, tasarım ve hızlı veri işleme bir araya geliyor. Gösterişli sözler değil — sonuçlar.</p>
-
-    <div class="cta-row fade-up reveal" style="transition-delay:160ms">
-      <button class="btn primary" onclick="copyUrl()">Siteyi Kopyala</button>
-      <a class="btn ghost" href="#features" style="text-decoration:none;color:inherit">Özellikleri Gör</a>
-    </div>
-
-    <div style="margin-top:22px;display:flex;gap:12px;align-items:center">
-      <div class="card" style="display:flex;gap:12px;align-items:center;max-width:520px">
-        <div style="width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent-b),var(--accent-a));display:grid;place-items:center;font-weight:800">AI</div>
-        <div>
-          <div style="font-weight:700">Gerçek Zamanlı Analiz</div>
-          <div style="color:var(--muted);font-size:13px;margin-top:6px">Karmaşık veri setlerinden anlık içgörüler. Filtreleyin, bağlayın, hareket geçin.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <aside class="hero-right">
-    <div class="panel-visual tilt card" id="tiltCard" style="transition:transform 300ms">
-      <div class="visual-top">
-        <div>
-          <div style="font-size:13px;color:var(--muted)">Live Scanner</div>
-          <div class="stats"><b id="liveCount">1,248</b><small style="color:var(--muted)">events indexed</small></div>
-        </div>
-        <div class="fingerprint neon">
-          <!-- fingerprint svg artistic -->
-          <svg width="72" height="72" viewBox="0 0 24 24" fill="none">
-            <path d="M12 2v2" stroke="white" stroke-width="0.8" stroke-linecap="round"/>
-            <path d="M6 8c1-4 6-6 10-4" stroke="white" stroke-width="0.8" stroke-linecap="round"/>
-            <path d="M4 14c1-3 5-5 8-4" stroke="white" stroke-width="0.8" stroke-linecap="round"/>
-          </svg>
-        </div>
-      </div>
-      <div class="visual-chart" id="chartArea">
-        <div style="text-align:center">
-          <div style="font-weight:700">Network Graph</div>
-          <div style="color:var(--muted);font-size:13px;margin-top:8px">Etkinlikleri, ilişkileri ve izleri anında görselleştirin.</div>
-        </div>
-      </div>
-    </div>
-  </aside>
-</main>
-
-<section id="features" class="features">
-  <div class="feature card fade-up reveal">
-    <div style="font-size:22px;font-weight:800">Bağlantı Haritalama</div>
-    <p>Görsel ağ haritalarıyla ilişkileri keşfedin. Filtreler, katmanlar ve etkileşimli izleme.</p>
-  </div>
-  <div class="feature card fade-up reveal" style="transition-delay:60ms">
-    <div style="font-size:22px;font-weight:800">Görsel Analiz</div>
-    <p>Görüntüden yüz algılama, logo tanıma ve benzer görüntü aramaları.</p>
-  </div>
-  <div class="feature card fade-up reveal" style="transition-delay:120ms">
-    <div style="font-size:22px;font-weight:800">Gerçek Zamanlı Uyarılar</div>
-    <p>Kritik değişiklikler anında push/ webhook ile bildirilir. Olay bazlı kurallar.</p>
-  </div>
+<main>
+<section class="hero-gradient min-h-screen flex items-center justify-center pt-24 pb-16 w-full" style="background-image: url('')">
+<div class="container mx-auto px-4 flex flex-col items-center" bis_skin_checked="1">
+<div class="text-center max-w-4xl mx-auto" bis_skin_checked="1">
+<div class="inline-flex items-center bg-black bg-opacity-20 rounded-full px-4 py-1 mb-8" bis_skin_checked="1">
+<div class="w-4 h-4 flex items-center justify-center mr-2" bis_skin_checked="1">
+<i class="ri-shield-check-line text-green-400"></i>
+</div>
+<span class="text-gray-300 text-sm">Trusted by 10,000+ users worldwide</span>
+</div>
+<h1 class="text-5xl md:text-7xl font-bold mb-4">Sleuth Systems</h1>
+<h2 class="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500 mb-8">Redefined</h2>
+<p class="text-gray-300 text-xl mb-12 max-w-3xl mx-auto">
+The most advanced Discord lookup service with real-time data, comprehensive analytics, and unmatched accuracy.
+</p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16" bis_skin_checked="1">
+<button class="primary-button text-white px-8 py-3 rounded-button flex items-center whitespace-nowrap">
+<i class="ri-play-circle-line ri-lg mr-2"></i>
+Start Free Trial
+</button>
+<button class="secondary-button text-white px-8 py-3 rounded-button flex items-center whitespace-nowrap">
+<i class="ri-movie-line ri-lg mr-2"></i>
+Watch Demo
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto" bis_skin_checked="1">
+<div class="stat-gradient rounded-lg p-6 flex flex-col items-center" bis_skin_checked="1">
+<h3 class="text-4xl font-bold text-blue-400 mb-2">1M+</h3>
+<p class="text-gray-400">Lookups</p>
+</div>
+<div class="stat-gradient rounded-lg p-6 flex flex-col items-center" bis_skin_checked="1">
+<h3 class="text-4xl font-bold text-purple-400 mb-2">99.9%</h3>
+<p class="text-gray-400">Uptime</p>
+</div>
+<div class="stat-gradient rounded-lg p-6 flex flex-col items-center" bis_skin_checked="1">
+<h3 class="text-4xl font-bold text-indigo-400 mb-2">&lt;1s</h3>
+<p class="text-gray-400">Response</p>
+</div>
+</div>
+</div>
+</div>
 </section>
+<section class="py-24 bg-[#0f1117]">
+<div class="container mx-auto px-4" bis_skin_checked="1">
+<div class="text-center mb-16" bis_skin_checked="1">
+<h2 class="text-4xl font-bold mb-4">Powerful Features</h2>
+<p class="text-gray-300 max-w-2xl mx-auto">Discover why Discord Intelligence is the preferred choice for server owners, moderators, and community managers worldwide.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8" bis_skin_checked="1">
+<div class="bg-gray-800 rounded-lg p-8 transition-transform hover:transform hover:scale-105" bis_skin_checked="1">
+<div class="w-12 h-12 flex items-center justify-center bg-blue-500 bg-opacity-20 rounded-lg mb-6" bis_skin_checked="1">
+<i class="ri-search-line ri-xl text-blue-400"></i>
+</div>
+<h3 class="text-xl font-bold mb-4">Advanced User Lookup</h3>
+<p class="text-gray-300">Get detailed information about any Discord user with just their ID or username, including server history and activity metrics.</p>
+</div>
+<div class="bg-gray-800 rounded-lg p-8 transition-transform hover:transform hover:scale-105" bis_skin_checked="1">
+<div class="w-12 h-12 flex items-center justify-center bg-purple-500 bg-opacity-20 rounded-lg mb-6" bis_skin_checked="1">
+<i class="ri-bar-chart-line ri-xl text-purple-400"></i>
+</div>
+<h3 class="text-xl font-bold mb-4">Real-time Analytics</h3>
+<p class="text-gray-300">Monitor server activity, member engagement, and growth trends with our comprehensive analytics dashboard.</p>
+</div>
+<div class="bg-gray-800 rounded-lg p-8 transition-transform hover:transform hover:scale-105" bis_skin_checked="1">
+<div class="w-12 h-12 flex items-center justify-center bg-indigo-500 bg-opacity-20 rounded-lg mb-6" bis_skin_checked="1">
+<i class="ri-shield-line ri-xl text-indigo-400"></i>
+</div>
+<h3 class="text-xl font-bold mb-4">Security Monitoring</h3>
+<p class="text-gray-300">Identify potential security threats and suspicious users before they impact your community with our advanced risk assessment.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 bg-[#0f1117]">
+<div class="container mx-auto px-4" bis_skin_checked="1">
+<div class="flex flex-col md:flex-row items-center gap-16" bis_skin_checked="1">
+<div class="md:w-1/2" bis_skin_checked="1">
+<h2 class="text-4xl font-bold mb-6">How It Works</h2>
+<p class="text-gray-300 mb-8">Our platform provides seamless integration with Discord's API to deliver accurate and comprehensive data in real-time.</p>
+<div class="space-y-6" bis_skin_checked="1">
+<div class="flex items-start" bis_skin_checked="1">
+<div class="w-8 h-8 flex items-center justify-center bg-blue-500 bg-opacity-20 rounded-full mr-4 mt-1" bis_skin_checked="1">
+<span class="text-blue-400 font-bold">1</span>
+</div>
+<div bis_skin_checked="1">
+<h3 class="text-xl font-bold mb-2">Connect Your Server</h3>
+<p class="text-gray-300">Link your Discord server to our platform with just a few clicks.</p>
+</div>
+</div>
+<div class="flex items-start" bis_skin_checked="1">
+<div class="w-8 h-8 flex items-center justify-center bg-purple-500 bg-opacity-20 rounded-full mr-4 mt-1" bis_skin_checked="1">
+<span class="text-purple-400 font-bold">2</span>
+</div>
+<div bis_skin_checked="1">
+<h3 class="text-xl font-bold mb-2">Configure Settings</h3>
+<p class="text-gray-300">Customize your dashboard and set up the metrics that matter most to you.</p>
+</div>
+</div>
+<div class="flex items-start" bis_skin_checked="1">
+<div class="w-8 h-8 flex items-center justify-center bg-indigo-500 bg-opacity-20 rounded-full mr-4 mt-1" bis_skin_checked="1">
+<span class="text-indigo-400 font-bold">3</span>
+</div>
+<div bis_skin_checked="1">
+<h3 class="text-xl font-bold mb-2">Access Insights</h3>
+<p class="text-gray-300">Start exploring detailed analytics and user information immediately.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="md:w-1/2" bis_skin_checked="1">
+<img src="https://readdy.ai/api/search-image?query=futuristic%20dashboard%20interface%20with%20dark%20theme%2C%20showing%20discord%20analytics%2C%20user%20profiles%20and%20server%20statistics%2C%20clean%20modern%20UI%20design%20with%20blue%20and%20purple%20accent%20colors%2C%20professional%20data%20visualization&amp;width=600&amp;height=500&amp;seq=123457&amp;orientation=portrait" alt="Discord Intelligence Dashboard" class="rounded-lg shadow-2xl">
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 bg-[#0f1117]">
+<div class="container mx-auto px-4" bis_skin_checked="1">
+<div class="text-center mb-16" bis_skin_checked="1">
+<h2 class="text-4xl font-bold mb-4">Pricing Plans</h2>
+<p class="text-gray-300 max-w-2xl mx-auto">Choose the perfect plan for your Discord community needs.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto" bis_skin_checked="1">
+<div class="bg-gray-800 rounded-lg p-8 border border-gray-700 transition-transform hover:transform hover:scale-105" bis_skin_checked="1">
+<h3 class="text-2xl font-bold mb-2">Basic</h3>
+<p class="text-gray-400 mb-6">For small communities</p>
+<div class="text-4xl font-bold mb-6" bis_skin_checked="1">$9<span class="text-gray-400 text-lg font-normal">/month</span></div>
+<ul class="space-y-4 mb-8">
+<li class="flex items-start">
+<i class="ri-check-line text-green-400 mr-2 mt-1"></i>
+<span>Up to 5,000 members</span>
+</li>
+<li class="flex items-start">
+<i class="ri-check-line text-green-400 mr-2 mt-1"></i>
+<span>Basic user lookup</span>
+</li>
+<li class="flex items-start">
+<i class="ri-check-line text-green-400 mr-2 mt-1"></i>
+<span>Server activity reports</span>
+</li>
+<li class="flex items-start text-gray-500">
+<i class="ri-close-line mr-2 mt-1"></i>
+<span>Advanced analytics</span>
+</li>
+<li class="flex items-start text-gray-500">
+<i class="ri-close-line mr-2 mt-1"></i>
+<span>Security monitoring</span>
+</li>
+</ul>
+<button class="w-full secondary-button text-white py-3 rounded-button whitespace-nowrap">Get Started</button>
+</div>
+<div class="bg-gray-800 rounded-lg p-8 border-2 border-primary relative transition-transform hover:transform hover:scale-105" bis_skin_checked="1">
+<div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-primary text-white px-4 py-1 rounded-full text-sm font-bold" bis_skin_checked="1">
+MOST POPULAR
+</div>
+<h3 class="text-2xl font-bold mb-2">Pro</h3>
+<p class="text-gray-400 mb-6">For growing communities</p>
+<div class="text-4xl font-bold mb-6" bis_skin_checked="1">$29<span class="text-gray-400 text-lg font-normal">/month</span></div>
+<ul class="space-y-4 mb-8">
+<li class="flex items-start">
+<i class="ri-check-line text-green-400 mr-2 mt-1"></i>
+<span>Up to 20,000 members</span>
+</li>
+<li class="flex items-start">
+<i class="ri-check-line text-green-400 mr-2 mt-1"></i>
+<span>Advanced user lookup</span>
+</li>
+<li class="flex items-start">
+<i class="ri-check-line text-green-400 mr-2 mt-1"></i>
+<span>Detailed analytics dashboard</span>
+</li>
+<li class="flex items-start">
+<i class="ri-check-line text-green-400 mr-2 mt-1"></i>
+<span>Basic security monitoring</span>
+</li>
+<li class="flex items-start text-gray-500">
+<i class="ri-close-line mr-2 mt-1"></i>
+<span>API access</span>
+</li>
+</ul>
+<button class="w-full primary-button text-white py-3 rounded-button whitespace-nowrap">Get Started</button>
+</div>
+<div class="bg-gray-800 rounded-lg p-8 border border-gray-700 transition-transform hover:transform hover:scale-105" bis_skin_checked="1">
+<h3 class="text-2xl font-bold mb-2">Enterprise</h3>
+<p class="text-gray-400 mb-6">For large communities</p>
+<div class="text-4xl font-bold mb-6" bis_skin_checked="1">$79<span class="text-gray-400 text-lg font-normal">/month</span></div>
+<ul class="space-y-4 mb-8">
+<li class="flex items-start">
+<i class="ri-check-line text-green-400 mr-2 mt-1"></i>
+<span>Unlimited members</span>
+</li>
+<li class="flex items-start">
+<i class="ri-check-line text-green-400 mr-2 mt-1"></i>
+<span>Complete user history</span>
+</li>
+<li class="flex items-start">
+<i class="ri-check-line text-green-400 mr-2 mt-1"></i>
+<span>Advanced analytics &amp; reporting</span>
+</li>
+<li class="flex items-start">
+<i class="ri-check-line text-green-400 mr-2 mt-1"></i>
+<span>Premium security monitoring</span>
+</li>
+<li class="flex items-start">
+<i class="ri-check-line text-green-400 mr-2 mt-1"></i>
+<span>Full API access</span>
+</li>
+</ul>
+<button class="w-full secondary-button text-white py-3 rounded-button whitespace-nowrap">Contact Sales</button>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 bg-[#0f1117]">
+<div class="container mx-auto px-4" bis_skin_checked="1">
+<div class="text-center mb-16" bis_skin_checked="1">
+<h2 class="text-4xl font-bold mb-4">Trusted by Discord Communities Worldwide</h2>
+<p class="text-gray-300 max-w-2xl mx-auto">Join thousands of Discord servers that rely on our platform for community management.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto" bis_skin_checked="1">
+<div class="flex flex-col items-center" bis_skin_checked="1">
+<div class="w-16 h-16 flex items-center justify-center bg-blue-500 bg-opacity-10 rounded-full mb-4" bis_skin_checked="1">
+<i class="ri-gamepad-line ri-2x text-blue-400"></i>
+</div>
+<p class="font-bold">GamersUnite</p>
+</div>
+<div class="flex flex-col items-center" bis_skin_checked="1">
+<div class="w-16 h-16 flex items-center justify-center bg-purple-500 bg-opacity-10 rounded-full mb-4" bis_skin_checked="1">
+<i class="ri-code-line ri-2x text-purple-400"></i>
+</div>
+<p class="font-bold">DevNetwork</p>
+</div>
+<div class="flex flex-col items-center" bis_skin_checked="1">
+<div class="w-16 h-16 flex items-center justify-center bg-indigo-500 bg-opacity-10 rounded-full mb-4" bis_skin_checked="1">
+<i class="ri-music-line ri-2x text-indigo-400"></i>
+</div>
+<p class="font-bold">MusicLovers</p>
+</div>
+<div class="flex flex-col items-center" bis_skin_checked="1">
+<div class="w-16 h-16 flex items-center justify-center bg-blue-500 bg-opacity-10 rounded-full mb-4" bis_skin_checked="1">
+<i class="ri-book-line ri-2x text-blue-400"></i>
+</div>
+<p class="font-bold">StudyGroup</p>
+</div>
+</div>
+<div class="mt-20 max-w-4xl mx-auto bg-gray-800 rounded-lg p-8" bis_skin_checked="1">
+<div class="flex flex-col md:flex-row items-center gap-8" bis_skin_checked="1">
+<div class="w-20 h-20 flex items-center justify-center bg-blue-500 bg-opacity-10 rounded-full" bis_skin_checked="1">
+<i class="ri-user-line ri-2x text-blue-400"></i>
+</div>
+<div bis_skin_checked="1">
+<p class="text-lg italic mb-4">"Discord Intelligence has completely transformed how we manage our gaming community. The user lookup feature has been invaluable for identifying problematic users and keeping our server safe."</p>
+<p class="font-bold">Michael Rodriguez</p>
+<p class="text-gray-400">Community Manager, GamersUnite</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 bg-[#0f1117]">
+<div class="container mx-auto px-4" bis_skin_checked="1">
+<div class="max-w-4xl mx-auto bg-gradient-to-r from-blue-900 to-purple-900 rounded-lg p-12 text-center" bis_skin_checked="1">
+<h2 class="text-4xl font-bold mb-6">Ready to Elevate Your Discord Experience?</h2>
+<p class="text-gray-300 mb-8 max-w-2xl mx-auto">Join thousands of Discord communities that trust our platform for comprehensive analytics and user management.</p>
+<button class="primary-button text-white px-8 py-3 rounded-button flex items-center mx-auto whitespace-nowrap">
+<i class="ri-rocket-line ri-lg mr-2"></i>
+Start Your Free Trial
+</button>
+<p class="text-gray-400 mt-4">No credit card required. 14-day free trial.</p>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-[#0f1117] py-16">
+<div class="container mx-auto px-4" bis_skin_checked="1">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12" bis_skin_checked="1">
+<div bis_skin_checked="1">
+<div class="flex items-center mb-6" bis_skin_checked="1">
+<div class="w-10 h-10 flex items-center justify-center text-primary mr-2" bis_skin_checked="1">
+<img src="https://media.discordapp.net/attachments/1393702929654878241/1409167744154468423/52237dfd12a1d96e72d70420cb85303e-removebg-preview.png?ex=68ac653b&is=68ab13bb&hm=181d60a5809e5c45e5996dc1661dc2b4e12d1b50ea06999b3593720f121513b8&=&format=webp&quality=lossless" 
+     alt="Benim Logom" 
+     style="width:32px; height:auto;">
 
-<footer>
-  <div>
-    <div style="font-weight:700">Sleuth Systems</div>
-    <div style="color:var(--muted);font-size:13px">htrps://sleuth.site • OSINT · Analiz</div>
-  </div>
-  <div style="display:flex;gap:10px;align-items:center">
-    <small style="color:var(--muted)">© Sleuth Systems — 2025</small>
-    <button class="btn" onclick="scrollToTop()">Yukarı</button>
-  </div>
+</div>
+<span class="font-['Pacifico'] text-xl text-white">Sleuth Systems</span>
+</div>
+<p class="text-gray-400 mb-6">The most advanced Discord lookup service with real-time data and comprehensive analytics.</p>
+<div class="flex space-x-4" bis_skin_checked="1">
+<a href="#" class="w-8 h-8 flex items-center justify-center bg-gray-800 rounded-full">
+<i class="ri-twitter-x-line text-gray-400"></i>
+</a>
+<a href="https://discord.gg/7Q7XffH2YF" class="w-8 h-8 flex items-center justify-center bg-gray-800 rounded-full">
+<i class="ri-discord-line text-gray-400"></i>
+</a>
+<a href="https://github.com/d4rkheus" class="w-8 h-8 flex items-center justify-center bg-gray-800 rounded-full">
+<i class="ri-github-line text-gray-400"></i>
+</a>
+</div>
+</div>
+<div bis_skin_checked="1">
+<h3 class="text-lg font-bold mb-6">Product</h3>
+<ul class="space-y-4">
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Features</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Pricing</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">API</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Integrations</a></li>
+</ul>
+</div>
+<div bis_skin_checked="1">
+<h3 class="text-lg font-bold mb-6">Resources</h3>
+<ul class="space-y-4">
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Documentation</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Community</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Support</a></li>
+</ul>
+</div>
+<div bis_skin_checked="1">
+<h3 class="text-lg font-bold mb-6">Company</h3>
+<ul class="space-y-4">
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Careers</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-gray-800 pt-8" bis_skin_checked="1">
+<div class="flex flex-col md:flex-row justify-between items-center" bis_skin_checked="1">
+<p class="text-gray-500 mb-4 md:mb-0">© 2025 Sleuth Systems. All rights reserved.</p>
+<div class="flex space-x-4" bis_skin_checked="1">
+<div class="flex items-center" bis_skin_checked="1">
+<i class="ri-visa-line ri-lg text-gray-400 mr-2"></i>
+</div>
+<div class="flex items-center" bis_skin_checked="1">
+<i class="ri-mastercard-line ri-lg text-gray-400 mr-2"></i>
+</div>
+<div class="flex items-center" bis_skin_checked="1">
+<i class="ri-paypal-line ri-lg text-gray-400 mr-2"></i>
+</div>
+</div>
+</div>
+</div>
+</div>
 </footer>
+<script id="navbarScript">
+document.addEventListener('DOMContentLoaded', function() {
+const header = document.querySelector('header');
+window.addEventListener('scroll', function() {
+if (window.scrollY > 10) {
+header.classList.add('shadow-lg');
+} else {
+header.classList.remove('shadow-lg');
+}
+});
+});
+</script>
 
-  </div>  <script>
-    // Copy provided URL
-    function copyUrl(){
-      const u = 'htrps://sleuth.site';
-      navigator.clipboard?.writeText(u).then(()=>{
-        const b = document.querySelector('.btn.primary');
-        b.textContent = 'Kopyalandı!';
-        setTimeout(()=>b.textContent = u,1500);
-      }).catch(()=>alert('Kopyalama desteklenmiyor'));
-    }
 
-    // simple tilt on mouse move
-    const card = document.getElementById('tiltCard');
-    window.addEventListener('mousemove', (e)=>{
-      const rect = card.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
-      card.style.transform = `rotateX(${ -y * 6 }deg) rotateY(${ x * 10 }deg)`;
-    });
-    window.addEventListener('mouseleave', ()=> card.style.transform = '');
-
-    // reveal on scroll
-    const observers = document.querySelectorAll('.fade-up');
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('reveal') });
-    }, {threshold:0.12});
-    observers.forEach(o=>io.observe(o));
-
-    function scrollToTop(){ window.scrollTo({top:0,behavior:'smooth'}) }
-
-    // particle background
-    const canvas = document.getElementById('bg');
-    const ctx = canvas.getContext('2d');
-    let W=canvas.width=innerWidth, H=canvas.height=innerHeight; 
-    const pts = [];
-    function init(){ pts.length=0; const count = Math.floor((W*H)/60000);
-      for(let i=0;i<count;i++){ pts.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.3+0.2,vx:(Math.random()-0.5)*0.25,vy:(Math.random()-0.5)*0.25}) }
-    }
-    function resize(){ W=canvas.width=innerWidth; H=canvas.height=innerHeight; init(); }
-    addEventListener('resize', resize);
-
-    function frame(){ ctx.clearRect(0,0,W,H);
-      // gradient glow
-      const g = ctx.createLinearGradient(0,0,W,H); g.addColorStop(0,'rgba(10,10,25,0.4)'); g.addColorStop(1,'rgba(2,2,6,0.6)'); ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
-
-      for(let p of pts){ p.x += p.vx; p.y += p.vy; if(p.x<-20) p.x=W+20; if(p.x>W+20) p.x=-20; if(p.y<-20) p.y=H+20; if(p.y>H+20) p.y=-20;
-        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle = 'rgba(120,100,255,0.06)'; ctx.fill();
-      }
-      // connect nearby
-      for(let i=0;i<pts.length;i++){
-        for(let j=i+1;j<pts.length;j++){
-          const a=pts[i], b=pts[j]; const dx=a.x-b.x, dy=a.y-b.y; const d=dx*dx+dy*dy; if(d<16000){ ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.strokeStyle='rgba(100,120,255,'+ (0.12 - d/16000*0.1) +')'; ctx.lineWidth=0.6; ctx.stroke(); }
-        }
-      }
-      requestAnimationFrame(frame);
-    }
-    resize(); frame();
-
-    // tiny live-count increment demo (eye candy)
-    const live = document.getElementById('liveCount');
-    let count = parseInt(live.textContent.replace(/,/g,''))||1248;
-    setInterval(()=>{ count += Math.floor(Math.random()*6); live.textContent = count.toLocaleString(); }, 2200);
-
-    // onboarding small flourish
-    document.addEventListener('DOMContentLoaded', ()=>{
-      document.querySelectorAll('.reveal').forEach((el,i)=>setTimeout(()=>el.classList.add('reveal'), i*80));
-    });
-  </script></body>
-                                                                       </html>
+</body></html>
