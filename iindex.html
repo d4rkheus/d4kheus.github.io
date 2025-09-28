@@ -1,0 +1,498 @@
+<!doctype html>
+
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Berlin — Psikolojik Manipülasyon: Tanıma & Savunma Rehberi (25 Madde)</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+    :root{--bg:#0b1220;--card:#0f1724;--accent:#7c5cff;--muted:#cbd5e1;--glass:rgba(255,255,255,0.03)}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial;background:linear-gradient(180deg,#070816 0%, #0b1220 70%);color:var(--muted)}
+    .wrap{max-width:1100px;margin:28px auto;padding:28px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);box-shadow:0 12px 40px rgba(2,6,23,0.7)}
+    header{display:flex;align-items:center;gap:16px}
+    .logo{width:72px;height:72px;border-radius:16px;background:linear-gradient(135deg,var(--accent),#4f46e5);display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:20px;box-shadow:0 10px 30px rgba(124,92,255,0.14)}
+    h1{margin:0;font-size:20px}
+    p.lead{margin:6px 0 18px;color:#9aa4b2}
+    .controls{display:flex;gap:12px;align-items:center;margin:18px 0}
+    input[type=search]{background:var(--card);border:1px solid rgba(255,255,255,0.03);padding:10px 12px;border-radius:12px;color:var(--muted);outline:none;width:360px}
+    .badge{background:var(--glass);padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,0.02);font-size:13px}
+    table{width:100%;border-collapse:collapse;margin-top:12px;border-radius:12px;overflow:hidden}
+    thead th{position:sticky;top:0;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter: blur(6px);padding:14px;text-align:left;font-weight:700;color:#e6eef8;border-bottom:1px solid rgba(255,255,255,0.04)}
+    tbody tr{transition:transform .12s ease, background .12s ease}
+    tbody tr:hover{transform:translateY(-6px);box-shadow:0 26px 60px rgba(2,6,23,0.7), inset 0 1px 0 rgba(255,255,255,0.02)}
+    td{padding:14px;border-bottom:1px dashed rgba(255,255,255,0.03);vertical-align:top}
+    .title{font-weight:700;color:#fff}
+    .muted{color:#9aa4b2;font-size:13px}
+    details{background:linear-gradient(90deg, rgba(255,255,255,0.01), transparent);padding:10px;border-radius:8px}
+    summary{cursor:pointer;outline:none}
+    .pill{display:inline-block;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.02);font-size:12px}
+    .accent{color:var(--accent);font-weight:700}
+    .example{margin-top:8px;padding:10px;border-radius:8px;background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));border:1px solid rgba(255,255,255,0.02)}
+    footer{margin-top:18px;color:#9aa4b2;font-size:13px}
+    @media (max-width:900px){.wrap{padding:18px}input[type=search]{width:100%}}
+    tbody tr td .marker{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:10px;vertical-align:middle;box-shadow:0 6px 22px rgba(124,92,255,0.06)}
+    .zen{font-family:Inter, 'Segoe UI', Roboto;letter-spacing:0.2px}
+  
+header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap; /* mobilde alt alta gelsin */
+}
+
+.wrap {
+  max-width: 1100px;
+  margin: 28px auto;
+  padding: 28px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  box-shadow: 0 12px 40px rgba(2,6,23,0.7);
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto; /* tabloyu kaydırılabilir yap */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  border-radius: 12px;
+  overflow: hidden;
+  min-width: 600px; /* tablo küçülmesin, kaydırılsın */
+}
+
+@media (max-width: 900px) {
+  .wrap { padding: 18px; }
+  input[type=search] { width: 100%; }
+}
+
+@media (max-width: 600px) {
+  h1 { font-size: 16px; }
+  p.lead { font-size: 13px; }
+  .logo { width: 56px; height: 56px; font-size: 16px; }
+  table thead th, td { padding: 10px; font-size: 13px; }
+}
+
+</style>
+</head>
+<body>
+  <div class="wrap zen">
+    <header>
+      <div class="logo">B</div>
+      <div>
+        <h1>Berlin — Psikolojik Manipülasyon Rehberi <span class="accent">(25 Detaylı Madde)</span></h1>
+        <p class="lead">25 taktik; her biri için: tanım, tipik işaretler (örnek), olası etkiler, hangi kişilik/koşullarda işe yarar ve korunma/cevap yolları.</p>
+      </div>
+    </header><div class="controls">
+  <input id="search" type="search" placeholder="Ara: taktik, etki, örnek, kişilik..." oninput="filterTable()" />
+  <div class="badge">25 madde • ayrıntılı • zen / vaporwave görünüm</div>
+</div>
+
+<div class="table-container">
+  <table id="tactics">
+  <thead>
+    <tr>
+      <th style="width:6%">#</th>
+      <th style="width:32%">Taktik</th>
+      <th style="width:32%">Belirti &amp; Örnek</th>
+      <th style="width:30%">Etkiler • Hangi kişilerde işler • Korunma</th>
+    </tr>
+  </thead>
+  <tbody>
+
+<!-- 1 --><tr>
+  <td><span class="marker" style="background:linear-gradient(180deg,#fbcfe8,#7c5cff)"></span>1</td>
+  <td><div class="title">Gaslighting (Gerçekliği Saptırma)</div><div class="muted">Bir kişinin algısını sürekli sorgulatma.</div></td>
+  <td>
+    <details>
+      <summary>Belirti &amp; Örnek</summary>
+      <div class="example">"Bunu hiç söylemedim" ya da "Sen yanlış hatırlıyorsun" denir. Örnek: Tartışmadan sonra partneriniz yaptığınızı iddia ettiği şeyi inkar eder.</div>
+    </details>
+  </td>
+  <td>
+    <details>
+      <summary>Etkiler • Kimlerde işe yarar • Korunma</summary>
+      <div class="example"><strong>Etkiler:</strong> Kendine güvensizlik, şüphe. <strong>Kimlerde etkili:</strong> Düşük özgüvenli, doğrulama arayanlar. <strong>Korunma:</strong> Kayıt tutma, tarafsız tanıklar, profesyonel destek.</div>
+    </details>
+  </td>
+</tr><!-- 2 --><tr>
+  <td><span class="marker" style="background:linear-gradient(180deg,#dbeafe,#60a5fa)"></span>2</td>
+  <td><div class="title">Love-bombing (Aşırı Övgü)</div><div class="muted">Hızlı ve yoğun iltifatlarla bağ kurma.</div></td>
+  <td>
+    <details>
+      <summary>Belirti &amp; Örnek</summary>
+      <div class="example">Kısa sürede aşırı hediye/iltifat/bağ kurma: "Seninle yaşlanmak istiyorum" türü abartılar.</div>
+    </details>
+  </td>
+  <td>
+    <details>
+      <summary>Etkiler • Kimlerde etkili • Korunma</summary>
+      <div class="example"><strong>Etkiler:</strong> Hızlı bağlanma, eleştiriye kapalı olma. <strong>Kim:</strong> Duygusal boşluğu olanlar. <strong>Korunma:</strong> Zaman tanı, sınırlar, küçük adımlarla ilerle.</div>
+    </details>
+  </td>
+</tr><!-- 3 --><tr>
+  <td><span class="marker" style="background:linear-gradient(180deg,#bbf7d0,#34d399)"></span>3</td>
+  <td><div class="title">Foot-in-the-door (Aşamalı Kabul)</div><div class="muted">Küçük rica ile başlayıp büyük taleplere ulaşma.</div></td>
+  <td>
+    <details>
+      <summary>Belirti &amp; Örnek</summary>
+      <div class="example">Önce küçük bir şey isteme; kabul edilince daha büyük istek. Örnek: İlk başta küçük borç, sonra yüksek miktar.</div>
+    </details>
+  </td>
+  <td>
+    <details>
+      <summary>Etkiler • Kimlerde etkili • Korunma</summary>
+      <div class="example"><strong>Etkiler:</strong> Kademeli bağımlılık. <strong>Kim:</strong> Yardımsever, hayır demekte zorlananlar. <strong>Korunma:</strong> Her isteği bağımsız değerlendir.</div>
+    </details>
+  </td>
+</tr><!-- 4 --><tr>
+  <td><span class="marker" style="background:linear-gradient(180deg,#fecdd3,#fb7185)"></span>4</td>
+  <td><div class="title">Guilt-tripping (Suçluluk Yükleme)</div><div class="muted">Duygusal baskı ile istem alma.</div></td>
+  <td>
+    <details>
+      <summary>Belirti &amp; Örnek</summary>
+      <div class="example">"Bunu yapmazsan beni üzersin". Örnek: Aile içinde manipülatif suçlamalarla davranış kontrolü.</div>
+    </details>
+  </td>
+  <td>
+    <details>
+      <summary>Etkiler • Kimlerde etkili • Korunma</summary>
+      <div class="example"><strong>Etkiler:</strong> Suçluluk hissi, isteksiz teslimiyet. <strong>Kim:</strong> Empatik, sorumluluk alanlar. <strong>Korunma:</strong> Duyguları ayır, mantıkla değerlendirme.</div>
+    </details>
+  </td>
+</tr><!-- 5 --><tr>
+  <td><span class="marker" style="background:linear-gradient(180deg,#c7d2fe,#6366f1)"></span>5</td>
+  <td><div class="title">Divide & Conquer (Böl ve Yönet)</div><div class="muted">Grubu zayıflatmak için parçalama.</div></td>
+  <td>
+    <details>
+      <summary>Belirti &amp; Örnek</summary>
+      <div class="example">İki tarafı karşı karşıya getirme, dedikodu yayma. Örnek: İş yerinde rakipleri birbirine düşürme.</div>
+    </details>
+  </td>
+  <td>
+    <details>
+      <summary>Etkiler • Kimlerde etkili • Korunma</summary>
+      <div class="example"><strong>Etkiler:</strong> Güvensizlik, verimsizlik. <strong>Kim:</strong> Grup içi belirsizlik/rekabet. <strong>Korunma:</strong> Şeffaf iletişim, bilgiyi doğrula, ortak zemin oluştur.</div>
+    </details>
+  </td>
+</tr><!-- 6 --><tr>
+  <td><span class="marker" style="background:linear-gradient(180deg,#fef3c7,#f59e0b)"></span>6</td>
+  <td><div class="title">Gatekeeping (Bilgi Tekeli)</div><div class="muted">Bilgiyi kontrol ederek güç sağlama.</div></td>
+  <td>
+    <details>
+      <summary>Belirti &amp; Örnek</summary>
+      <div class="example">Bilgi bazı kişilere saklanır. Örnek: Karar süreçlerinde belirli kişileri dışlama.</div>
+    </details>
+  </td>
+  <td>
+    <details>
+      <summary>Etkiler • Kimlerde etkili • Korunma</summary>
+      <div class="example"><strong>Etkiler:</strong> Bağımlılık, yanlış kararlar. <strong>Kim:</strong> Yetki boşluğu olanlar. <strong>Korunma:</strong> Alternatif kaynak, şeffaflık talep et.</div>
+    </details>
+  </td>
+</tr><!-- 7 --><tr>
+  <td><span class="marker" style="background:linear-gradient(180deg,#e6fffa,#34d399)"></span>7</td>
+  <td><div class="title">Mirroring (Aynalama)</div><div class="muted">Davranış ve dil taklidi ile empati yanıltması.</div></td>
+  <td>
+    <details>
+      <summary>Belirti &amp; Örnek</summary>
+      <div class="example">Hızla ortak ilgi gösterme, jestleri kopyalama. Örnek: Kısa sürede aynı kelimeleri kullanma.</div>
+    </details>
+  </td>
+  <td>
+    <details>
+      <summary>Etkiler • Kimlerde etkili • Korunma</summary>
+      <div class="example"><strong>Etkiler:</strong> Sahte samimiyet hissi. <strong>Kim:</strong> Onay arayanlar. <strong>Korunma:</strong> Tutarlılığı zamanla test et.</div>
+    </details>
+  </td>
+</tr><!-- 8 --><tr>
+  <td><span class="marker" style="background:linear-gradient(180deg,#fde68a,#fb923c)"></span>8</td>
+  <td><div class="title">Scarcity (Kıtlık Baskısı)</div><div class="muted">Yokmuş gibi göstererek talebi artırma.</div></td>
+  <td>
+    <details>
+      <summary>Belirti &amp; Örnek</summary>
+      <div class="example">"Sadece bugün" veya "sınırlı sayıda" denir. Örnek: Aceleyle satın alma histeri yaratma.</div>
+    </details>
+  </td>
+  <td>
+    <details>
+      <summary>Etkiler • Kimlerde etkili • Korunma</summary>
+      <div class="example"><strong>Etkiler:</strong> Aceleci karar, pişmanlık. <strong>Kim:</strong> FOMO (kaçırma korkusu) yaşayanlar. <strong>Korunma:</strong> Soğukkanlılık, alternatif araştır, bekle.</div>
+    </details>
+  </td>
+</tr><!-- 9 --><tr>
+  <td><span class="marker" style="background:linear-gradient(180deg,#fce7f3,#fb7185)"></span>9</td>
+  <td><div class="title">Authority (Otoriteye Başvurma)</div><div class="muted">Otorite/saygın kişi referansı ile ikna etme.</div></td>
+  <td>
+    <details>
+      <summary>Belirti &amp; Örnek</summary>
+      <div class="example">"Uzmanlar diyor ki..." veya ünlü referansı. Örnek: Bilimsel gibi görünen ama çekirdek bilgi eksik promosyonlar.</div>
+    </details>
+  </td>
+  <td>
+    <details>
+      <summary>Etkiler • Kimlerde etkili • Korunma</summary>
+      <div class="example"><strong>Etkiler:</strong> Eleştiri azalır, itaat artar. <strong>Kim:</strong> Otoriteye inanma eğiliminde olanlar. <strong>Korunma:</strong> Kaynağı kontrol et, ikinci görüş al.</div>
+    </details>
+  </td>
+</tr><!-- 10 --><tr>
+  <td><span class="marker" style="background:linear-gradient(180deg,#e0e7ff,#6366f1)"></span>10</td>
+  <td><div class="title">Social Proof (Sosyal Kanıt)</div><div class="muted">Bir şeyin doğru olduğunu topluluk onayıyla gösterme.</div></td>
+  <td>
+    <details>
+      <summary>Belirti &amp; Örnek</summary>
+      <div class="example">"Herkes bunu yapıyor" söylemi. Örnek: Yorum ve beğeni sayılarıyla güven oluşturma.</div>
+    </details>
+  </td>
+  <td>
+    <details>
+      <summary>Etkiler • Kimlerde etkili • Korunma</summary>
+      <div class="example"><strong>Etkiler:</strong> Kalabalık etkisiyle yanlış davranış. <strong>Kim:</strong> Grup uyumuna önem verenler. <strong>Korunma:</strong> Bireysel araştırma, eleştirel düşünce.</div>
+    </details>
+  </td>
+</tr><!-- 11 --><tr>
+  <td><span class="marker" style="background:linear-gradient(180deg,#bbf7d0,#34d399)"></span>11</td>
+  <td><div class="title">Foot-in-mouth (Utandırma/İftira)</div><div class="muted">Küçük bir utanç ya da eleştiri ile kontrol sağlama.</div></td>
+  <td>
+    <details>
+      <summary>Belirti &amp; Örnek</summary>
+      <div class="example">Hafif aşağılama ile kişinin savunmaya geçmesi sağlanır. Örnek: "Bu işi yapamazsın" söylemi sonrası herkese kanıtlanma çabası.</div>
+    </details>
+  </td>
+  <td>
+    <details>
+      <summary>Etkiler • Kimlerde etkili • Korunma</summary>
+      <div class="example"><strong>Etkiler:</strong> Savunmacı davranış. <strong>Kim:</strong> Gurur/itibar hassasiyeti. <strong>Korunma:</strong> Duyguyu fark et, sakin geri dönüş.</div>
+    </details>
+  </td>
+</tr><!-- 12 --><tr>
+  <td><span class="marker" style="background:linear-gradient(180deg,#fef3c7,#f59e0b)"></span>12</td>
+  <td><div class="title">Neglect (Gözardı Etme)</div><div class="muted">İhtiyaçları önemsemeyerek kontrol sağlama.</div></td>
+  <td>
+    <details>
+      <summary>Belirti &amp; Örnek</summary>
+      <div class="example">İlgisizlik gösterme: iletişimi kısıtlama, planlara katmama. Örnek: Bilinçli ilgisiz bırakma cezası.</div>
+    </details>
+  </td>
+  <td>
+    <details>
+      <summary>Etkiler • Kimlerde etkili • Korunma</summary>
+      <div class="example"><strong>Etkiler:</strong> Kaygı, onay arama. <strong>Kim:</strong> Bağlanma ihtiyacı yüksek olanlar. <strong>Korunma:</strong> Net iletişim, duygu paylaşımı, gerektiğinde mesafe.</div>
+    </details>
+  </td>
+</tr><!-- 13 --><tr>
+  <td><span class="marker" style="background:linear-gradient(180deg,#fde68a,#fb923c)"></span>13</td>
+  <td><div class="title">False-Consensus (Yanıltıcı Genellik)</div><div class="muted">Kendi görüşünü evrenselmiş gibi gösterme.</div></td>
+  <td>
+    <details>
+      <summary>Belirti &amp; Örnek</summary>
+      <div class="example">"Herkes böyle düşünüyor" argümanı. Örnek: Tartışmada çoğunluğu varmış gibi gösterme.</div>
+    </details>
+  </td>
+  <td>
+    <details>
+      <summary>Etkiler • Kimlerde etkili • Korunma</summary>
+      <div class="example"><strong>Etkiler:</strong> Yanlış norm algısı. <strong>Kim:</strong> Uyum sağlamak isteyenler. <strong>Korunma:</strong> Veri ve kaynak iste, anket/çeşitlilik kontrolü.</div>
+    </details>
+  </td>
+</tr><!-- 14 --><tr>
+  <td><span class="marker" style="background:linear-gradient(180deg,#e6fffa,#34d399)"></span>14</td>
+  <td><div class="title">Labeling (Etiketleme)</div><div class="muted">Birini olumsuz/kalıcı bir etiketle damgalama.</div></td>
+  <td>
+    <details>
+      <summary>Belirti &amp; Örnek</summary>
+      <div class="example">"Sen tembelsin" gibi genelleyici etiketler. Örnek: Hataları kişilik olarak tanımlama.</div>
+    </details>
+  </td>
+  <td>
+    <details>
+      <summary>Etkiler • Kimlerde etkili • Korunma</summary>
+      <div class="example"><strong>Etkiler:</strong> İçselleştirme, düşük kimlik. <strong>Kim:</strong> İtaatkâr veya eleştiriye hassas kişiler. <strong>Korunma:</strong> Davranış-odaklı geribildirim iste, etikete karşı gerçek örnekler göster.</div>
+    </details>
+  </td>
+</tr><!-- 15 --><tr>
+  <td><span class="marker" style="background:linear-gradient(180deg,#bbf7d0,#34d399)"></span>15</td>
+  <td><div class="title">Overjustification (Aşırı Mantıklandırma)</div><div class="muted">Duyguyu rasyonalize ederek kontrol etme.</div></td>
+  <td>
+    <details>
+      <summary>Belirti &amp; Örnek</summary>
+      <div class="example">Her davranışı mantık çerçevesine oturtma: "Bunu yapman için sebep şudur" vs gerçek duyguyu görmezden gelme.</div>
+    </details>
+  </td>
+  <td>
+    <details>
+      <summary>Etkiler • Kimlerde etkili • Korunma</summary>
+      <div class="example"><strong>Etkiler:</strong> Duygusal yabancılaşma. <strong>Kim:</strong> Duygularını önemsemeyenler. <strong>Korunma:</strong> Duyguları adlandır, duygusal doğrulama iste.</div>
+    </details>
+  </td>
+</tr><!-- 16 --><tr>
+  <td><span class="marker" style="background:linear-gradient(180deg,#fecdd3,#fb7185)"></span>16</td>
+  <td><div class="title">Blame-shifting (Suçu Başkasına Atma)</div><div class="muted">Sorumluluğu başkasına yıkma.</div></td>
+  <td>
+    <details>
+      <summary>Belirti &amp; Örnek</summary>
+      <div class="example">Hata yapıldığında karşı tarafın suçlanması. Örnek: "Sen yüzünden böyle oldu".</div>
+    </details>
+  </td>
+  <td>
+    <details>
+      <summary>Etkiler • Kimlerde etkili • Korunma</summary>
+      <div class="example"><strong>Etkiler:</strong> Karışık sorumluluk, öfke. <strong>Kim:</strong> Suçu kabullenmede zorlananlar. <strong>Korunma:</strong> Olayları belgeleyin, açık sınırlar.</div>
+    </details>
+  </td>
+</tr><!-- 17 --><tr>
+  <td><span class="marker" style="background:linear-gradient(180deg,#dbeafe,#60a5fa)"></span>17</td>
+  <td><div class="title">Projection (Yansıtma)</div><div class="muted">Kendi duygularını başkasına atfetme.</div></td>
+  <td>
+    <details>
+      <summary>Belirti &amp; Örnek</summary>
+      <div class="example">Kendisi güvensiz iken karşısındakini suçlama: "Sen bana güvenmiyorsun".</div>
+    </details>
+  </td>
+  <td>
+    <details>
+      <summary>Etkiler • Kimlerde etkili • Korunma</summary>
+      <div class="example"><strong>Etkiler:</strong> Tartışma döngüleri. <strong>Kim:</strong> Öz-farkındalığı az olan kişiler. <strong>Korunma:</strong> Duyguları adlandırma, sınır koyma.</div>
+    </details>
+  </td>
+</tr><!-- 18 --><tr>
+  <td><span class="marker" style="background:linear-gradient(180deg,#fde68a,#fb923c)"></span>18</td>
+  <td><div class="title">False Equivalence (Yanlış Eşdeğerlik)</div><div class="muted">İki farklı şeyi eşitleyerek dikkati dağıtma.</div></td>
+  <td>
+    <details>
+      <summary>Belirti &amp; Örnek</summary>
+      <div class="example">Küçük hatayı büyükyle eşitleme: "Sen de aynısını yaptın" diyerek kendi hatasını meşrulaştırma.</div>
+    </details>
+  </td>
+  <td>
+    <details>
+      <summary>Etkiler • Kimlerde etkili • Korunma</summary>
+      <div class="example"><strong>Etkiler:</strong> Gerçek sorun görünmez olur. <strong>Kim:</strong> İkna edilmesi kolay konuları olanlar. <strong>Korunma:</strong> Olayları ayrı ayrı değerlendir.</div>
+    </details>
+  </td>
+</tr><!-- 19 --><tr>
+  <td><span class="marker" style="background:linear-gradient(180deg,#e6fffa,#34d399)"></span>19</td>
+  <td><div class="title">Appeal to Emotion (Duyguya Hitap)</div><div class="muted">Mantık yerine duyguları kullanma.</div></td>
+  <td>
+    <details>
+      <summary>Belirti &amp; Örnek</summary>
+      <div class="example">Çok duygusal hikâyelerle ikna etme. Örnek: Empati sömürüsü.</div>
+    </details>
+  </td>
+  <td>
+    <details>
+      <summary>Etkiler • Kimlerde etkili • Korunma</summary>
+      <div class="example"><strong>Etkiler:</strong> Mantığın geri planda kalması. <strong>Kim:</strong> Empati yüksek kişiler. <strong>Korunma:</strong> Duygu ve veri ayrımı yap.</div>
+    </details>
+  </td>
+</tr><!-- 20 --><tr>
+  <td><span class="marker" style="background:linear-gradient(180deg,#fce7f3,#fb7185)"></span>20</td>
+  <td><div class="title">Negging (İncelikli Aşağılama)</div><div class="muted">İltifat gibi görünen küçük aşağılama.</div></td>
+  <td>
+    <details>
+      <summary>Belirti &amp; Örnek</summary>
+      <div class="example">"Güzel görünüyorsun, ama..." tarzı karışık mesajlar. Örnek: Değer hissettirip, sonra küçük eleştiri.</div>
+    </details>
+  </td>
+  <td>
+    <details>
+      <summary>Etkiler • Kimlerde etkili • Korunma</summary>
+      <div class="example"><strong>Etkiler:</strong> Onay arama davranışı artar. <strong>Kim:</strong> Onay arayanlar. <strong>Korunma:</strong> Eleştirinin ardındaki amacı sorgula, sınır koy.</div>
+    </details>
+  </td>
+</tr><!-- 21 --><tr>
+  <td><span class="marker" style="background:linear-gradient(180deg,#c7d2fe,#6366f1)"></span>21</td>
+  <td><div class="title">Triangulation (Üçgenleme)</div><div class="muted">İki kişi arasına üçüncü birini sokarak dinamiği kontrol etme.</div></td>
+  <td>
+    <details>
+      <summary>Belirti &amp; Örnek</summary>
+      <div class="example">Birini aracı kılarak mesaj iletme veya şüphe ekme. Örnek: "O da söylüyor ki..."</div>
+    </details>
+  </td>
+  <td>
+    <details>
+      <summary>Etkiler • Kimlerde etkili • Korunma</summary>
+      <div class="example"><strong>Etkiler:</strong> Karışık iletişim, güvensizlik. <strong>Kim:</strong> Grup dinamiklerinde zayıf bireyler. <strong>Korunma:</strong> Direkt iletişim iste, üçüncü tarafı doğrula.</div>
+    </details>
+  </td>
+</tr><!-- 22 --><tr>
+  <td><span class="marker" style="background:linear-gradient(180deg,#bbf7d0,#34d399)"></span>22</td>
+  <td><div class="title">Stonewalling (Duvar Örme)</div><div class="muted">İletişimi tamamen keserek üstünlük sağlama.</div></td>
+  <td>
+    <details>
+      <summary>Belirti &amp; Örnek</summary>
+      <div class="example">Konuşmayı reddetme, sessizlik kullanma. Örnek: Tartışmada aniden soğuma ve iletişimi kesme.</div>
+    </details>
+  </td>
+  <td>
+    <details>
+      <summary>Etkiler • Kimlerde etkili • Korunma</summary>
+      <div class="example"><strong>Etkiler:</strong> Çaresizlik, öfke. <strong>Kim:</strong> Bağlanma/itirazda zayıf olanlar. <strong>Korunma:</strong> Zaman sınırı koy, gerekli desteği talep et.</div>
+    </details>
+  </td>
+</tr><!-- 23 --><tr>
+  <td><span class="marker" style="background:linear-gradient(180deg,#fde68a,#fb923c)"></span>23</td>
+  <td><div class="title">Manipulative Rewarding (Koşullu Ödüllendirme)</div><div class="muted">Davranışı ödülle kontrol etme.</div></td>
+  <td>
+    <details>
+      <summary>Belirti &amp; Örnek</summary>
+      <div class="example">İstediğin davranışı gösterince ödül verilir; ödül bekletilirse davranış istenir. Örnek: Duygusal ödüllerle itaat sağlama.</div>
+    </details>
+  </td>
+  <td>
+    <details>
+      <summary>Etkiler • Kimlerde etkili • Korunma</summary>
+      <div class="example"><strong>Etkiler:</strong> Koşullu sevgi/bağlılık. <strong>Kim:</strong> Onay arayanlar. <strong>Korunma:</strong> Koşulsuz destek arayışı, sınırlar.</div>
+    </details>
+  </td>
+</tr><!-- 24 --><tr>
+  <td><span class="marker" style="background:linear-gradient(180deg,#e0e7ff,#6366f1)"></span>24</td>
+  <td><div class="title">Selective Memory (Seçici Unutma)</div><div class="muted">Geçmişi kendi lehine yeniden yazma.</div></td>
+  <td>
+    <details>
+      <summary>Belirti &amp; Örnek</summary>
+      <div class="example">Geçmiş olayları çarpıtma veya yalnızca bazı kısımları anma. Örnek: "O zaman sen ..." diye yanlış anı aktarma.</div>
+    </details>
+  </td>
+  <td>
+    <details>
+      <summary>Etkiler • Kimlerde etkili • Korunma</summary>
+      <div class="example"><strong>Etkiler:</strong> Karışık gerçek algısı. <strong>Kim:</strong> Güvensiz hafıza sahipleri. <strong>Korunma:</strong> Yazılı kanıtlar, tarihsel kayıtlar.</div>
+    </details>
+  </td>
+</tr><!-- 25 --><tr>
+  <td><span class="marker" style="background:linear-gradient(180deg,#fbcfe8,#7c5cff)"></span>25</td>
+  <td><div class="title">Behavioral Conditioning (Davranışsal Koşullanma)</div><div class="muted">Ödül/ceza döngüsüyle istenen davranışı pekiştirme.</div></td>
+  <td>
+    <details>
+      <summary>Belirti &amp; Örnek</summary>
+      <div class="example">Belirli davranışlar ödüllendirilir, istenmeyen davranışlar görmezden gelinir veya cezalandırılır. Örnek: Duygusal 'ödül/ceza' düzeni.</div>
+    </details>
+  </td>
+  <td>
+    <details>
+      <summary>Etkiler • Kimlerde etkili • Korunma</summary>
+      <div class="example"><strong>Etkiler:</strong> Alışkanlık haline dönüş, bağımlılık. <strong>Kim:</strong> Tutarsız davranışlardan etkilenebilenler. <strong>Korunma:</strong> Davranış kalıplarını fark et, profesyonel destek arayışı.</div>
+    </details>
+  </td>
+</tr></tbody>
+</table>
+</div>
+
+<footer>
+  Hazırlayan: <strong>Berlin</strong> — Bu rehber eğitim ve korunma amaçlıdır. Zararlı eylemler için yol göstermez.
+</footer>
+
+  </div><script>
+function filterTable(){
+  const q = document.getElementById('search').value.toLowerCase();
+  const rows = document.querySelectorAll('#tactics tbody tr');
+  rows.forEach(r=>{
+    r.style.display = Array.from(r.querySelectorAll('td')).some(td=>td.textContent.toLowerCase().includes(q)) ? '' : 'none';
+  });
+}
+</script></body>
+</html>
